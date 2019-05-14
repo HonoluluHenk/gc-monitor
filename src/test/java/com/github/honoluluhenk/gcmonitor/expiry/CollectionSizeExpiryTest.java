@@ -4,8 +4,8 @@ import java.util.List;
 import java.util.OptionalInt;
 
 import com.github.honoluluhenk.gcmonitor.PayloadFixture;
-import com.github.honoluluhenk.gcmonitor.timeddata.TimedData;
 import com.github.honoluluhenk.gcmonitor.TestUtil;
+import com.github.honoluluhenk.gcmonitor.timeddata.TimedData;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 

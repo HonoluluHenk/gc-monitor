@@ -37,7 +37,7 @@ class MemoryUsageCalculatorTest {
 
 	@Test
 	void calculateUsagePct_nonzero_used_empty() {
-		MemoryUsageCalculator calc = new MemoryUsageCalculator( new Memory(INIT, 100, COMMITTED, -1));
+		MemoryUsageCalculator calc = new MemoryUsageCalculator(new Memory(INIT, 100, COMMITTED, -1));
 
 		assertThat(calc.calculatePct())
 				.isNotPresent();

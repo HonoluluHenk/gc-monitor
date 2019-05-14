@@ -77,7 +77,6 @@ public class AverageUsageAboveThreshold implements OverflowDetector {
 				alarmThresholdPct));
 	}
 
-
 	@Override
 	public void validate(int expectedReadings) {
 		if (expectedReadings < numMeasures) {
