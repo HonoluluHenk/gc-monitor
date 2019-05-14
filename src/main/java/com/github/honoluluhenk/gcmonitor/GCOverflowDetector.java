@@ -6,9 +6,9 @@ import com.github.honoluluhenk.gcmonitor.eventsource.GCEventSource;
 import com.github.honoluluhenk.gcmonitor.expiry.Expiry;
 import com.github.honoluluhenk.gcmonitor.gc.GCEvent;
 import com.github.honoluluhenk.gcmonitor.memory.Memory;
+import com.github.honoluluhenk.gcmonitor.memory.MemoryPoolType;
 import com.github.honoluluhenk.gcmonitor.timeddata.TimeSeries;
 import com.github.honoluluhenk.gcmonitor.timeddata.TimedData;
-import com.github.honoluluhenk.gcmonitor.memory.MemoryPoolType;
 
 import static java.util.Objects.requireNonNull;
 

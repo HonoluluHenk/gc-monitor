@@ -202,7 +202,8 @@ public class UsageAboveThresholdTest {
 				Overflow o = new UsageAboveThreshold(3, THRESHOLD_PCT)
 						.detect(ts);
 
-				assertOverflow(o, Status.OK, "have 3 readings, only 1 of 3 exceede threshold of 90.0%: [50.0, 51.0, 96.0]");
+				assertOverflow(o, Status.OK, "have 3 readings, only 1 of 3 exceede threshold of 90.0%: [50.0, 51.0, 96"
+						+ ".0]");
 			}
 		}
 

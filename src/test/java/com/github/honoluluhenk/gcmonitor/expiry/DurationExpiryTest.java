@@ -7,8 +7,8 @@ import java.util.Collections;
 import java.util.List;
 
 import com.github.honoluluhenk.gcmonitor.PayloadFixture;
-import com.github.honoluluhenk.gcmonitor.timeddata.TimedData;
 import com.github.honoluluhenk.gcmonitor.TestUtil;
+import com.github.honoluluhenk.gcmonitor.timeddata.TimedData;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -37,7 +37,8 @@ class DurationExpiryTest {
 
 	@Test
 	void expires_very_old_data() {
-		boolean expired = EXPIRY.isExpired(new Params<>(new TimedData<>(TestUtil.mkTime(NOW_DAY - 5), new PayloadFixture(
+		boolean expired = EXPIRY.isExpired(new Params<>(new TimedData<>(TestUtil.mkTime(NOW_DAY - 5),
+				new PayloadFixture(
 				"expired")), DONT_CARE));
 
 		assertTrue(expired);
@@ -45,7 +46,8 @@ class DurationExpiryTest {
 
 	@Test
 	void expires_old_data_on_threshold() {
-		boolean expired = EXPIRY.isExpired(new Params<>(new TimedData<>(TestUtil.mkTime(EXPIRY_DAY), new PayloadFixture(
+		boolean expired = EXPIRY.isExpired(new Params<>(new TimedData<>(TestUtil.mkTime(EXPIRY_DAY),
+				new PayloadFixture(
 				"expired")), DONT_CARE));
 
 		assertTrue(expired);
@@ -62,7 +64,8 @@ class DurationExpiryTest {
 
 	@Test
 	void does_not_expire_data_on_now() {
-		boolean expired = EXPIRY.isExpired(new Params<>(new TimedData<>(TestUtil.mkTime(NOW_DAY), new PayloadFixture("not "
+		boolean expired = EXPIRY.isExpired(new Params<>(new TimedData<>(TestUtil.mkTime(NOW_DAY), new PayloadFixture(
+				"not "
 				+ "expired")), DONT_CARE));
 
 		assertFalse(expired);
@@ -70,7 +73,8 @@ class DurationExpiryTest {
 
 	@Test
 	void does_not_expire_future_data() {
-		boolean expired = EXPIRY.isExpired(new Params<>(new TimedData<>(TestUtil.mkTime(NOW_DAY + 5), new PayloadFixture("not "
+		boolean expired = EXPIRY.isExpired(new Params<>(new TimedData<>(TestUtil.mkTime(NOW_DAY + 5),
+				new PayloadFixture("not "
 				+ "expired")), DONT_CARE));
 
 		assertFalse(expired);

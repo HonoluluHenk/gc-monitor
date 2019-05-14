@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <FindBugsFilter>
-  <And>
-    <Bug category="STYLE"/>
-    <Bug code="USBR"/>
-    <Bug pattern="USBR_UNNECESSARY_STORE_BEFORE_RETURN"/>
-  </And>
-  <LastVersion value="-1" relOp="NEQ"/>
-  <Bug pattern="OI_OPTIONAL_ISSUES_PRIMITIVE_VARIANT_PREFERRED"/>
-  <And>
-    <Bug category="STYLE"/>
-    <Bug code="IMC"/>
-    <Bug pattern="IMC_IMMATURE_CLASS_NO_TOSTRING"/>
-  </And>
+	<And>
+		<Bug category="STYLE"/>
+		<Bug code="USBR"/>
+		<Bug pattern="USBR_UNNECESSARY_STORE_BEFORE_RETURN"/>
+	</And>
+	<LastVersion value="-1" relOp="NEQ"/>
+	<Bug pattern="OI_OPTIONAL_ISSUES_PRIMITIVE_VARIANT_PREFERRED"/>
+	<And>
+		<Bug category="STYLE"/>
+		<Bug code="IMC"/>
+		<Bug pattern="IMC_IMMATURE_CLASS_NO_TOSTRING"/>
+	</And>
 </FindBugsFilter>

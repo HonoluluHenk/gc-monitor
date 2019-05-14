@@ -13,7 +13,7 @@ Helps you detecting Garbage Collector overflows before they trash, crash or over
 // If the last 3 memory usage measures are above 80%,
 // detection will return an overflow.
 GCOverflowDetector detector = new GCOverflowDetector(
-    new OpexnJDKEventSource(),
+    new OpenJDKEventSource(),
     new CollectionSizeExpiry<>(5),
     new UsageAboveThreshold(3, 80)
 );

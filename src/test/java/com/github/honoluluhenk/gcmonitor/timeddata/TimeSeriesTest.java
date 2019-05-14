@@ -4,8 +4,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.github.honoluluhenk.gcmonitor.PayloadFixture;
-import com.github.honoluluhenk.gcmonitor.expiry.FakeExpiry;
 import com.github.honoluluhenk.gcmonitor.TestUtil;
+import com.github.honoluluhenk.gcmonitor.expiry.FakeExpiry;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;

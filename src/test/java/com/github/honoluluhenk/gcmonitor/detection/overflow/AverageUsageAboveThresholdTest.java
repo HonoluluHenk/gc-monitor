@@ -179,7 +179,8 @@ class AverageUsageAboveThresholdTest {
 
 				Overflow o = detector.detect(gcInfo);
 
-				assertOverflow(o, Status.OK, "usagePct < alarmThresholdPct: 74.87437185929649 < 75.0, have 199 measures");
+				assertOverflow(o, Status.OK, "usagePct < alarmThresholdPct: 74.87437185929649 < 75.0, have 199 "
+						+ "measures");
 
 			}
 
