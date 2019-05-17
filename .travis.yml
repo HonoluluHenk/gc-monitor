@@ -1,14 +1,33 @@
+`stages:
+  - test
+  - verify
+  - name: deploy
+    if: branch = master
+
 language: java
 
 jdk:
-#  - oraclejdk8
   - openjdk8
+#  - oraclejdk8
   - openjdk12
 #  - ibmjdk8
 
 install:
   - java -version
   - which javadoc
+  - env | sort
 
-script:
-  - ./mvnw -B -U clean package
+jobs:
+  include:
+    - stage: test
+      script:
+        - ./mvnw -B -U clean test
+    - stage: verify
+      script: echo verify
+    - stage: deploy
+      script: echo deploy
+
+
+cache:
+  directories:
+    - $HOME/.m2
