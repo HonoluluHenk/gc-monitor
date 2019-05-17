@@ -1,13 +1,14 @@
 language: java
 
 jdk:
-  - oraclejdk8
+#  - oraclejdk8
   - openjdk8
   - openjdk12
-  - ibmjdk8
+#  - ibmjdk8
 
 install:
   - java -version
+  - which javadoc
 
 script:
   - ./mvnw -B -U clean package
