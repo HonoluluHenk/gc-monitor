@@ -27,7 +27,7 @@ jobs:
       jdk:
         - openjdk8
         - oraclejdk8
-        - ibmjdk8
+        - ibmjava8
     - stage: test-verify
       script: ./mvnw -B -U clean verify
       jdk:
