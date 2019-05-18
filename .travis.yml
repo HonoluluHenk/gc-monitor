@@ -1,4 +1,6 @@
+os: linux
 group: edge
+sudo: required
 
 stages:
   - test
