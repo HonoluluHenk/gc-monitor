@@ -1,3 +1,5 @@
+group: edge
+
 stages:
   - test
   - name: test-verify
@@ -28,10 +30,12 @@ jobs:
         - openjdk8
         - oraclejdk8
         - ibmjava8
+
     - stage: test-verify
       script: ./mvnw -B -U clean verify
       jdk:
         - openjdk12
+
     - stage: test-verify-deploy
       script: ./mvnw -B -U clean verify
       jdk:
