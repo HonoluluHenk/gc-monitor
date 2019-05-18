@@ -25,8 +25,8 @@ jobs:
     - stage: test
       script: ./mvnw -B -U clean test
       jdk:
-      - openjdk12
-      - oraclejdk12
+      - openjdk8
+      - oraclejdk8
     - stage: verify
       script: ./mvnw -B -U clean verify
       jdk: openjdk12
