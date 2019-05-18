@@ -4,30 +4,30 @@ dist: trusty
 
 stages:
   - test
-  - name: verify
-    if: branch != master
-  - name: verify-deploy
-    if: branch = master
+  - verify
+  - name: deploy
+    if: repo = "HonoluluHenk/gcmonitor" AND branch in (master, develop)
 
 language: java
 jdk:
   - openjdk8
   - oraclejdk8
 
-script: ./mvnw -B -U clean test
+script: ./mvnw -B -U test
 
 install:
   - java -version
   - env | sort
 
 matrix:
+  fast_finish: true
   include:
     - stage: verify
-      script: ./mvnw -B -U clean verify
+      script: ./mvnw -B -U verify
       jdk: openjdk12
 
-    - stage: verify-deploy
-      script: ./mvnw -B -U clean verify deploy
+    - stage: deploy
+      script: ./mvnw --settings deploy/settings.xml -B -U -Pdeploy-only deploy
       jdk: openjdk12
 
 cache:

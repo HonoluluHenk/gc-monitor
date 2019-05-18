@@ -44,7 +44,22 @@
 		<pitest-plugin.skip>false</pitest-plugin.skip>
 		<quality-plugins.skip>false</quality-plugins.skip>
 		<javadoc-plugin.skip>false</javadoc-plugin.skip>
+		<gpg-plugin.skip>true</gpg-plugin.skip>
 	</properties>
+
+	<profiles>
+		<profile>
+			<id>deploy-only</id>
+			<properties>
+				<pitest-plugin.skip>true</pitest-plugin.skip>
+				<quality-plugins.skip>true</quality-plugins.skip>
+				<javadoc-plugin.skip>true</javadoc-plugin.skip>
+				<skipTests>true</skipTests>
+				<maven.test.skip>true</maven.test.skip>
+				<gpg-plugin.skip>false</gpg-plugin.skip>
+			</properties>
+		</profile>
+	</profiles>
 
 	<dependencyManagement>
 		<dependencies>
@@ -301,6 +316,33 @@
 			</plugin>
 
 			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-gpg-plugin</artifactId>
+				<version>1.6</version>
+				<configuration>
+					<skip>${gpg-plugin.skip}</skip>
+					<publicKeyring>${project.basedir}/deploy/gpg/public.key</publicKeyring>
+					<secretKeyring>${project.basedir}/deploy/gpg/private.key</secretKeyring>
+					<defaultKeyring>false</defaultKeyring>
+					<keyname>DF6C6C9B6F1C24BF2A0A642F16F61CDA29D3ECDB</keyname>
+					<passphraseServerId>gcmonitor-gpg-signing</passphraseServerId>
+					<gpgArguments>
+						<arg>--pinentry-mode</arg>
+						<arg>loopback</arg>
+					</gpgArguments>
+				</configuration>
+				<executions>
+					<execution>
+						<id>sign-artifacts</id>
+						<phase>verify</phase>
+						<goals>
+							<goal>sign</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
 				<groupId>external.atlassian.jgitflow</groupId>
 				<artifactId>jgitflow-maven-plugin</artifactId>
 				<version>1.0-m5.1</version>
@@ -367,4 +409,15 @@
 			</plugin>
 		</plugins>
 	</reporting>
+
+	<distributionManagement>
+		<snapshotRepository>
+			<id>ossrh</id>
+			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
+		</snapshotRepository>
+		<repository>
+			<id>ossrh</id>
+			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+		</repository>
+	</distributionManagement>
 </project>
