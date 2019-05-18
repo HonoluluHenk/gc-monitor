@@ -6,6 +6,11 @@ stages:
     if: branch = master
 
 language: java
+jdk:
+  - openjdk8
+  - oraclejdk8
+  - ibmjdk8
+  - openjdk12
 
 script: true
 
@@ -23,7 +28,7 @@ jobs:
         - openjdk8
         - oraclejdk8
         - ibmjdk8
-    - stage: test-and-verify
+    - stage: test-verify
       script: ./mvnw -B -U clean verify
       jdk:
         - openjdk12
