@@ -4,44 +4,31 @@ dist: trusty
 
 stages:
   - test
-  - name: test-verify
+  - name: verify
     if: branch != master
-  - name: test-verify-deploy
+  - name: verify-deploy
     if: branch = master
 
 language: java
-jdk:
-  - openjdk8
-  - oraclejdk8
-
-script: ./mvnw -B -U clean test
+#jdk:
+#  - openjdk8
+#  - oraclejdk8
+#
+#script: ./mvnw -B -U clean test
 
 install:
   - java -version
-  - which javadoc
   - env | sort
 
 matrix:
   include:
-    - stage: test-verify
+    - stage: verify
       script: ./mvnw -B -U clean verify
       jdk: openjdk12
 
-    - stage: test-verify-deploy
-      script: ./mvnw -B -U clean verify
+    - stage: verify-deploy
+      script: ./mvnw -B -U clean verify deploy
       jdk: openjdk12
-
-#  exclude:
-#    - stage: test
-#      jdk: openjdk12
-#    - stage: test-verify
-#      jdk:
-#      - openjdk8
-#      - oraclejdk8
-#    - stage: test-verify-deploy
-#      jdk:
-#      - openjdk8
-#      - oraclejdk8
 
 cache:
   directories:
