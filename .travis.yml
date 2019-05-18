@@ -15,8 +15,6 @@ jdk:
   - oraclejdk8
   - openjdk12
 
-script: ignore
-
 install:
   - java -version
   - which javadoc
