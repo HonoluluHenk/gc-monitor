@@ -1,12 +1,15 @@
 os: linux
 group: edge
 dist: trusty
+# build all branches except master and release
+# but allways build tags
+if: (branch != master AND NOT branch =~ /^release.*/) OR tag IS present
 
 stages:
   - test
   - verify
   - name: deploy
-    if: repo = "HonoluluHenk/gcmonitor" AND branch in (master, develop)
+    if: repo = "HonoluluHenk/gcmonitor" AND (branch = master OR tag IS present)
 
 language: java
 jdk:
