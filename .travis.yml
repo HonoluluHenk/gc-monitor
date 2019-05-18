@@ -24,8 +24,7 @@ install:
 
 matrix:
   include:
-    - stage: test
-      script:
+    - script:
         - ./mvnw -B -U clean test
       jdk:
         - openjdk8
