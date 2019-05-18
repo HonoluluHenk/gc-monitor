@@ -1,6 +1,6 @@
 os: linux
 group: edge
-dist: xenial
+dist: trusty
 
 stages:
   - test
@@ -14,9 +14,8 @@ jdk:
   - openjdk8
   - oraclejdk8
   - openjdk12
-#  - ibmjava8
 
-#script: true
+script: ignore
 
 install:
   - java -version
@@ -43,8 +42,16 @@ matrix:
         - openjdk12
 
   exclude:
-    - jdk: openjdk12
-
+    - stage: test
+      jdk: openjdk12
+    - stage: test-verify
+      jdk:
+      - openjdk8
+      - oraclejdk8
+    - stage: test-verify-deploy
+      jdk:
+      - openjdk8
+      - oraclejdk8
 
 cache:
   directories:
