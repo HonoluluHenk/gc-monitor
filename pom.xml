@@ -45,7 +45,6 @@
 
 		<pitest-plugin.skip>false</pitest-plugin.skip>
 		<quality-plugins.skip>false</quality-plugins.skip>
-		<javadoc-plugin.skip>false</javadoc-plugin.skip>
 		<gpg-plugin.skip>true</gpg-plugin.skip>
 	</properties>
 
@@ -55,7 +54,6 @@
 			<properties>
 				<pitest-plugin.skip>true</pitest-plugin.skip>
 				<quality-plugins.skip>true</quality-plugins.skip>
-				<javadoc-plugin.skip>true</javadoc-plugin.skip>
 				<skipTests>true</skipTests>
 				<maven.test.skip>true</maven.test.skip>
 				<gpg-plugin.skip>false</gpg-plugin.skip>
@@ -171,7 +169,6 @@
 				<artifactId>maven-javadoc-plugin</artifactId>
 				<version>3.1.0</version>
 				<configuration>
-					<skip>${javadoc-plugin.skip}</skip>
 					<doclint>all,-missing</doclint>
 					<javaApiLinks>
 						<api_1.8/>
