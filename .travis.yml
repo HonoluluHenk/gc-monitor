@@ -3,8 +3,8 @@ group: edge
 dist: trusty
 
 stages:
-#  - test
-#  - verify
+  - test
+  - verify
   - name: deploy
     if: repo = "HonoluluHenk/gcmonitor" AND branch in (master, develop)
 
@@ -24,9 +24,9 @@ install:
 matrix:
   fast_finish: true
   include:
-#    - stage: verify
-#      script: ./mvnw -B -U verify
-#      jdk: openjdk12
+    - stage: verify
+      script: ./mvnw -B -U verify
+      jdk: openjdk12
 
     - stage: deploy
       script: ./mvnw --settings deploy/settings.xml -B -U -Pdeploy-only deploy

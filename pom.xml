@@ -331,10 +331,11 @@
 					<keyname>DF6C6C9B6F1C24BF2A0A642F16F61CDA29D3ECDB</keyname>
 					<passphraseServerId>gcmonitor-gpg-signing</passphraseServerId>
 					<executable>gpg2</executable>
-<!--					<gpgArguments>-->
-<!--						<arg>&#45;&#45;pinentry-mode</arg>-->
-<!--						<arg>loopback</arg>-->
-<!--					</gpgArguments>-->
+					<!-- required for newer gpg2 versions (v2.0 on travis does not recognise this!)-->
+					<!--<gpgArguments>-->
+					<!--	<arg>&#45;&#45;pinentry-mode</arg>-->
+					<!--	<arg>loopback</arg>-->
+					<!--</gpgArguments>-->
 				</configuration>
 				<executions>
 					<execution>
