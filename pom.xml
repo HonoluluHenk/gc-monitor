@@ -1,4 +1,6 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.github.honoluluhenk.gcmonitor</groupId>
@@ -12,7 +14,7 @@
 
 	<licenses>
 		<license>
-			<name>Mozilla Public License 2.0 </name>
+			<name>Mozilla Public License 2.0</name>
 			<url>http://www.mozilla.org/en-US/MPL/2.0/</url>
 		</license>
 	</licenses>
@@ -137,7 +139,7 @@
 					<encoding>UTF-8</encoding>
 					<compilerArgs>
 						<arg>-Xlint:all</arg>
-						 <arg>-Werror</arg>
+						<arg>-Werror</arg>
 					</compilerArgs>
 				</configuration>
 			</plugin>
@@ -171,7 +173,9 @@
 				<configuration>
 					<skip>${javadoc-plugin.skip}</skip>
 					<doclint>all,-missing</doclint>
-					<javaApiLinks><api_1.8 /></javaApiLinks>
+					<javaApiLinks>
+						<api_1.8/>
+					</javaApiLinks>
 					<quiet>true</quiet>
 				</configuration>
 				<executions>
@@ -326,6 +330,7 @@
 					<defaultKeyring>false</defaultKeyring>
 					<keyname>DF6C6C9B6F1C24BF2A0A642F16F61CDA29D3ECDB</keyname>
 					<passphraseServerId>gcmonitor-gpg-signing</passphraseServerId>
+					<executable>gpg2</executable>
 					<gpgArguments>
 						<arg>--pinentry-mode</arg>
 						<arg>loopback</arg>
