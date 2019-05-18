@@ -20,7 +20,7 @@ install:
   - java -version
   - env | sort
 
-matrix:
+jobs:
   include:
     - stage: verify
       script: ./mvnw -B -U clean verify
