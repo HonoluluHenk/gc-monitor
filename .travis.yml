@@ -23,7 +23,6 @@ install:
   - java -version
   - which javadoc
   - env | sort
-  - jdk_switcher --help
 
 jobs:
   include:
