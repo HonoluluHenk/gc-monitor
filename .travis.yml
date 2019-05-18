@@ -1,6 +1,7 @@
 os: linux
 group: edge
 sudo: required
+dist: trusty
 
 stages:
   - test
