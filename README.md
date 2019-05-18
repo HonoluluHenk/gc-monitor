@@ -24,17 +24,17 @@ detector.start();
 // do some detection.
 Overflow overflow = detector.detect();
 // detect() may be called asynchronously and also multiple times.
-// The tenabled implementing an external healthcheck easily.
+// This allows implementing an external healthcheck easily.
+if (overflow.getStatus() == Status.OVERFLOW) {
+	System.out.println("Got overflow, reason: " + overflow.getReason());
+}
 
 // cleanup
 detector.stop();
 
-// the detector supports reuse by calling start again:
-detector.start();
-// ...
-detector.stop();
 ```
 
+The detector also supports re-use by calling `detector.start()` and `detector.stop()` repeatedly.
 
 
 # GCOverflowDetector

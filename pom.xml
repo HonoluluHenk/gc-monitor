@@ -3,7 +3,7 @@
 
 	<groupId>com.github.honoluluhenk.gcmonitor</groupId>
 	<artifactId>gcmonitor</artifactId>
-	<version>1.0.0</version>
+	<version>1.0.1</version>
 	<packaging>jar</packaging>
 
 	<name>GCMonitor</name>
@@ -12,7 +12,7 @@
 
 	<licenses>
 		<license>
-			<name>Mozilla Public License 2.0 </name>
+			<name>Mozilla Public License 2.0</name>
 			<url>http://www.mozilla.org/en-US/MPL/2.0/</url>
 		</license>
 	</licenses>
@@ -40,7 +40,24 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
 		<spotbugs.version>4.0.0-beta1</spotbugs.version>
+
+		<pitest-plugin.skip>false</pitest-plugin.skip>
+		<quality-plugins.skip>false</quality-plugins.skip>
+		<gpg-plugin.skip>true</gpg-plugin.skip>
 	</properties>
+
+	<profiles>
+		<profile>
+			<id>deploy-only</id>
+			<properties>
+				<pitest-plugin.skip>true</pitest-plugin.skip>
+				<quality-plugins.skip>true</quality-plugins.skip>
+				<skipTests>true</skipTests>
+				<maven.test.skip>true</maven.test.skip>
+				<gpg-plugin.skip>false</gpg-plugin.skip>
+			</properties>
+		</profile>
+	</profiles>
 
 	<dependencyManagement>
 		<dependencies>
@@ -118,7 +135,7 @@
 					<encoding>UTF-8</encoding>
 					<compilerArgs>
 						<arg>-Xlint:all</arg>
-						 <arg>-Werror</arg>
+						<arg>-Werror</arg>
 					</compilerArgs>
 				</configuration>
 			</plugin>
@@ -150,18 +167,13 @@
 				<artifactId>maven-javadoc-plugin</artifactId>
 				<version>3.1.0</version>
 				<configuration>
-					<javadocExecutable>${java.home}/bin/javadoc</javadocExecutable>
 					<doclint>all,-missing</doclint>
-					<javaApiLinks><api_1.8 /></javaApiLinks>
+					<javaApiLinks>
+						<api_1.8 />
+					</javaApiLinks>
 					<quiet>true</quiet>
 				</configuration>
 				<executions>
-					<execution>
-						<id>javadoc</id>
-						<goals>
-							<goal>javadoc</goal>
-						</goals>
-					</execution>
 					<execution>
 						<id>attach-javadocs</id>
 						<goals>
@@ -188,15 +200,8 @@
 				<groupId>com.github.spotbugs</groupId>
 				<artifactId>spotbugs-maven-plugin</artifactId>
 				<version>3.1.11</version>
-				<dependencies>
-					<!-- overwrite dependency on spotbugs if you want to specify the version of spotbugs -->
-					<dependency>
-						<groupId>com.github.spotbugs</groupId>
-						<artifactId>spotbugs</artifactId>
-						<version>${spotbugs.version}</version>
-					</dependency>
-				</dependencies>
 				<configuration>
+					<skip>${quality-plugins.skip}</skip>
 					<effort>Max</effort>
 					<excludeFilterFile>${project.basedir}/src/quality/spotbugs/spotbugs-exclude.xml</excludeFilterFile>
 					<plugins>
@@ -215,26 +220,28 @@
 				<executions>
 					<execution>
 						<id>spotbugs</id>
-						<phase>test</phase>
+						<phase>verify</phase>
 						<goals>
 							<goal>check</goal>
 						</goals>
 					</execution>
 				</executions>
+				<dependencies>
+					<!-- overwrite dependency on spotbugs if you want to specify the version of spotbugs -->
+					<dependency>
+						<groupId>com.github.spotbugs</groupId>
+						<artifactId>spotbugs</artifactId>
+						<version>${spotbugs.version}</version>
+					</dependency>
+				</dependencies>
 			</plugin>
 
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-checkstyle-plugin</artifactId>
 				<version>3.0.0</version>
-				<dependencies>
-					<dependency>
-						<groupId>com.puppycrawl.tools</groupId>
-						<artifactId>checkstyle</artifactId>
-						<version>8.19</version>
-					</dependency>
-				</dependencies>
 				<configuration>
+					<skip>${quality-plugins.skip}</skip>
 					<configLocation>src/quality/checkstyle/sun-checks-adapted.xml</configLocation>
 					<encoding>UTF-8</encoding>
 					<consoleOutput>true</consoleOutput>
@@ -243,12 +250,19 @@
 				<executions>
 					<execution>
 						<id>validate-checkstyle</id>
-						<phase>test</phase>
+						<phase>verify</phase>
 						<goals>
 							<goal>check</goal>
 						</goals>
 					</execution>
 				</executions>
+				<dependencies>
+					<dependency>
+						<groupId>com.puppycrawl.tools</groupId>
+						<artifactId>checkstyle</artifactId>
+						<version>8.19</version>
+					</dependency>
+				</dependencies>
 			</plugin>
 
 			<plugin>
@@ -256,6 +270,7 @@
 				<artifactId>maven-pmd-plugin</artifactId>
 				<version>3.12.0</version>
 				<configuration>
+					<skip>${quality-plugins.skip}</skip>
 					<rulesets>
 						<ruleset>src/quality/pmd/pmd-ruleset.xml</ruleset>
 					</rulesets>
@@ -263,7 +278,7 @@
 				<executions>
 					<execution>
 						<id>pmd</id>
-						<phase>test</phase>
+						<phase>verify</phase>
 						<goals>
 							<goal>check</goal>
 						</goals>
@@ -275,14 +290,8 @@
 				<groupId>org.pitest</groupId>
 				<artifactId>pitest-maven</artifactId>
 				<version>1.4.7</version>
-				<dependencies>
-					<dependency>
-						<groupId>org.pitest</groupId>
-						<artifactId>pitest-junit5-plugin</artifactId>
-						<version>0.8</version>
-					</dependency>
-				</dependencies>
 				<configuration>
+					<skip>${pitest-plugin.skip}</skip>
 					<coverageThreshold>100</coverageThreshold>
 					<excludedClasses>
 						<excludedClass>com.github.honoluluhenk.gcmonitor.eventsource.openjdk.OpenJDKEventSource</excludedClass>
@@ -290,9 +299,45 @@
 				</configuration>
 				<executions>
 					<execution>
-						<phase>test</phase>
+						<phase>verify</phase>
 						<goals>
 							<goal>mutationCoverage</goal>
+						</goals>
+					</execution>
+				</executions>
+				<dependencies>
+					<dependency>
+						<groupId>org.pitest</groupId>
+						<artifactId>pitest-junit5-plugin</artifactId>
+						<version>0.8</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-gpg-plugin</artifactId>
+				<version>1.6</version>
+				<configuration>
+					<skip>${gpg-plugin.skip}</skip>
+					<publicKeyring>${project.basedir}/deploy/gpg/public.key</publicKeyring>
+					<secretKeyring>${project.basedir}/deploy/gpg/private.key</secretKeyring>
+					<defaultKeyring>false</defaultKeyring>
+					<keyname>DF6C6C9B6F1C24BF2A0A642F16F61CDA29D3ECDB</keyname>
+					<passphraseServerId>gcmonitor-gpg-signing</passphraseServerId>
+					<executable>gpg2</executable>
+					<!-- required for newer gpg2 versions (v2.0 on travis does not recognise this!)-->
+					<!--<gpgArguments>-->
+					<!--	<arg>&#45;&#45;pinentry-mode</arg>-->
+					<!--	<arg>loopback</arg>-->
+					<!--</gpgArguments>-->
+				</configuration>
+				<executions>
+					<execution>
+						<id>sign-artifacts</id>
+						<phase>verify</phase>
+						<goals>
+							<goal>sign</goal>
 						</goals>
 					</execution>
 				</executions>
@@ -365,4 +410,15 @@
 			</plugin>
 		</plugins>
 	</reporting>
+
+	<distributionManagement>
+		<snapshotRepository>
+			<id>ossrh</id>
+			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
+		</snapshotRepository>
+		<repository>
+			<id>ossrh</id>
+			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+		</repository>
+	</distributionManagement>
 </project>

@@ -1,0 +1,39 @@
+os: linux
+group: edge
+dist: trusty
+
+stages:
+  - test
+  - verify
+  - name: deploy
+    if: repo = "HonoluluHenk/gcmonitor" AND branch in (master, develop)
+
+language: java
+jdk:
+# skip openjdk8 since this is used in the verify stage which also runs tests
+# - openjdk8
+  - oraclejdk8
+  - openjdk12
+
+script: ./mvnw -B -U test
+
+install:
+  - java -version
+  - env | sort
+  - gpg --version
+  - gpg2 --version
+
+matrix:
+  fast_finish: true
+  include:
+    - stage: verify
+      script: ./mvnw -B -U verify
+      jdk: openjdk8
+
+    - stage: deploy
+      script: ./mvnw --settings deploy/settings.xml -B -U -Pdeploy-only deploy
+      jdk: openjdk8
+
+cache:
+  directories:
+    - $HOME/.m2
