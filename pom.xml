@@ -3,7 +3,7 @@
 
 	<groupId>com.github.honoluluhenk.gcmonitor</groupId>
 	<artifactId>gcmonitor</artifactId>
-	<version>1.0.3</version>
+	<version>1.0.4</version>
 	<packaging>jar</packaging>
 
 	<name>GCMonitor</name>
@@ -341,6 +341,12 @@
 						</goals>
 					</execution>
 				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-deploy-plugin</artifactId>
+				<version>3.0.0-M1</version>
 			</plugin>
 
 			<plugin>
