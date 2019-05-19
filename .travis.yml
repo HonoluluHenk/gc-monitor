@@ -36,6 +36,7 @@ matrix:
     - stage: deploy
       script: ./mvnw --settings deploy/settings.xml -B -U -Pdeploy-only deploy
       jdk: openjdk8
+      cache: false
 
 cache:
   directories:

@@ -1,8 +1,10 @@
 # gc-monitor
 
+[![Build Status](https://travis-ci.org/HonoluluHenk/gcmonitor.svg?branch=develop)][Build Status Link]
+
+[Build Status Link]: https://travis-ci.org/HonoluluHenk/gcmonitor
+
 Helps you detecting Garbage Collector overflows before they trash, crash or overwhelm the JVM.
-
-
 
 # Usage
 
