@@ -30,6 +30,11 @@
 		<url>https://github.com/HonoluluHenk/gcmonitor</url>
 	</scm>
 
+	<ciManagement>
+		<url>https://travis-ci.org/HonoluluHenk/gcmonitor</url>
+		<system>travis</system>
+	</ciManagement>
+
 	<issueManagement>
 		<url>https://github.com/HonoluluHenk/gcmonitor/issues</url>
 		<system>github</system>
