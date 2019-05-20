@@ -1,5 +1,5 @@
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.github.honoluluhenk.gcmonitor.GCOverflowDetector;
 import com.github.honoluluhenk.gcmonitor.detection.overflow.AverageUsageAboveThreshold;
@@ -12,11 +12,16 @@ public class Tester {
 
 	private static final Logger LOG = LoggerFactory.getLogger(Tester.class);
 
-	private static final Map<Integer, Object> LEAK = new HashMap<>();
+	@SuppressWarnings("MismatchedQueryAndUpdateOfCollection")
+	private static final List<Object> LEAK = new ArrayList<>();
 
 	@SuppressWarnings("CallToSystemGC")
 	public static void main(String[] args) {
-		long quarter = Runtime.getRuntime().maxMemory() / 4;
+		long maxMemory = Runtime.getRuntime().maxMemory();
+		long freeMemory = Runtime.getRuntime().freeMemory();
+		LOG.info("memory, max: {}, free: {}", maxMemory, freeMemory);
+
+		long quarter = maxMemory / 4;
 
 		//		GCOverflowDetector mon = new GCOverflowDetector(2, 3, 60);
 		GCOverflowDetector mon = new GCOverflowDetector(
@@ -72,16 +77,16 @@ public class Tester {
 	private static void fillMem() {
 
 		for (int i = 0; i < Integer.MAX_VALUE >>> 8; i++) {
-			LEAK.put(i, new Object());
+			LEAK.add(i, new Object());
 		}
 	}
 
 	private static void fillMem(long numBytes) {
-		int offset = LEAK.size() + 1;
+		LOG.info("allocating: {}", numBytes);
 		if (numBytes > Integer.MAX_VALUE) {
 			throw new IllegalArgumentException("Cannot allocate " + numBytes + " bytes");
 		}
 		//noinspection NumericCastThatLosesPrecision
-		LEAK.put(offset, new byte[(int) numBytes]);
+		LEAK.add(new byte[(int) numBytes]);
 	}
 }
