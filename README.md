@@ -1,12 +1,26 @@
 # gc-monitor
 
 [![Build Status](https://travis-ci.org/HonoluluHenk/gcmonitor.svg?branch=develop)][Build Status Link]
+[![Maven Central](
+https://img.shields.io/maven-central/v/com.github.honoluluhenk.gcmonitor/gcmonitor.svg?label=Maven%20Central
+)][Maven Central Link]
 
 [Build Status Link]: https://travis-ci.org/HonoluluHenk/gcmonitor
+[Maven Central Link]: https://search.maven.org/search?q=g:%22com.github.honoluluhenk.gcmonitor%22%20AND%20a:%22gcmonitor%22
 
 Helps you detecting Garbage Collector overflows before they trash, crash or overwhelm the JVM.
 
 # Usage
+
+Maven dependency:
+```xml
+<dependency>
+  <groupId>com.github.honoluluhenk.gcmonitor</groupId>
+  <artifactId>gcmonitor</artifactId>
+  <version>1.0.4</version>
+</dependency>
+
+```
 
 ```java
 // this will collect data from an OpenJDK compatible JVM.
