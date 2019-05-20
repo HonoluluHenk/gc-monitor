@@ -381,7 +381,7 @@
 					<pushFeatures>true</pushFeatures>
 
 					<!-- goals on release-finish -->
-					<goals>clean validate</goals>
+					<goals>clean verify</goals>
 
 					<!-- do not fast-forward -->
 					<suppressFastForward>true</suppressFastForward>
