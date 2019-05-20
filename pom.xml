@@ -3,7 +3,7 @@
 
 	<groupId>com.github.honoluluhenk.gcmonitor</groupId>
 	<artifactId>gcmonitor</artifactId>
-	<version>1.0.4</version>
+	<version>1.0.5</version>
 	<packaging>jar</packaging>
 
 	<name>GCMonitor</name>
@@ -29,6 +29,11 @@
 		<developerConnection>https://github.com/HonoluluHenk/gcmonitor.git</developerConnection>
 		<url>https://github.com/HonoluluHenk/gcmonitor</url>
 	</scm>
+
+	<ciManagement>
+		<url>https://travis-ci.org/HonoluluHenk/gcmonitor</url>
+		<system>travis</system>
+	</ciManagement>
 
 	<issueManagement>
 		<url>https://github.com/HonoluluHenk/gcmonitor/issues</url>
@@ -81,6 +86,7 @@
 			<groupId>com.github.spotbugs</groupId>
 			<artifactId>spotbugs-annotations</artifactId>
 			<version>${spotbugs.version}</version>
+			<scope>provided</scope>
 		</dependency>
 
 		<dependency>
@@ -366,8 +372,8 @@
 					<allowSnapshots>true</allowSnapshots>
 					<allowUntracked>true</allowUntracked>
 
+					<noReleaseBuild>false</noReleaseBuild>
 					<!-- build/deploy is done by CI so we don't need to do this here -->
-					<noReleaseBuild>true</noReleaseBuild>
 					<noHotfixBuild>true</noHotfixBuild>
 					<noFeatureBuild>true</noFeatureBuild>
 					<pushReleases>true</pushReleases>
@@ -375,7 +381,7 @@
 					<pushFeatures>true</pushFeatures>
 
 					<!-- goals on release-finish -->
-					<goals>clean verify</goals>
+					<goals>clean validate</goals>
 
 					<!-- do not fast-forward -->
 					<suppressFastForward>true</suppressFastForward>
