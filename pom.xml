@@ -372,8 +372,8 @@
 					<allowSnapshots>true</allowSnapshots>
 					<allowUntracked>true</allowUntracked>
 
+					<noReleaseBuild>false</noReleaseBuild>
 					<!-- build/deploy is done by CI so we don't need to do this here -->
-					<noReleaseBuild>true</noReleaseBuild>
 					<noHotfixBuild>true</noHotfixBuild>
 					<noFeatureBuild>true</noFeatureBuild>
 					<pushReleases>true</pushReleases>
@@ -381,7 +381,7 @@
 					<pushFeatures>true</pushFeatures>
 
 					<!-- goals on release-finish -->
-					<goals>clean verify</goals>
+					<goals>clean validate</goals>
 
 					<!-- do not fast-forward -->
 					<suppressFastForward>true</suppressFastForward>

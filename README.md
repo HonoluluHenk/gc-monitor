@@ -17,7 +17,7 @@ Maven dependency:
 <dependency>
   <groupId>com.github.honoluluhenk.gcmonitor</groupId>
   <artifactId>gcmonitor</artifactId>
-  <version>1.0.4</version>
+  <version>1.0.5</version>
 </dependency>
 
 ```
@@ -121,3 +121,16 @@ Works like UsageAboveThreshold but averages the memory usage over N memory usage
 
 If the averaged usage is above a threshold, an overflow is detected.
 
+
+# Information for developers
+## Release checklist
+
+* check/update dependency version in README.md
+
+## Release
+
+Bump version numbers, build with all checks enabled and - if successful - push everything:
+```bash
+mvn -U jgitflow:release-start jgitflow:release-finish
+# and then wait for travis...
+```
