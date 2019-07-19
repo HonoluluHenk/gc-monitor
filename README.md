@@ -1,12 +1,9 @@
 # gc-monitor
 
-[![Build Status](https://travis-ci.org/HonoluluHenk/gcmonitor.svg?branch=develop)][Build Status Link]
+[![Build Status](https://travis-ci.org/HonoluluHenk/gcmonitor.svg?branch=develop)][Travis Link]
 [![Maven Central](
 https://img.shields.io/maven-central/v/com.github.honoluluhenk.gcmonitor/gcmonitor.svg?label=Maven%20Central
-)][Maven Central Link]
-
-[Build Status Link]: https://travis-ci.org/HonoluluHenk/gcmonitor
-[Maven Central Link]: https://search.maven.org/search?q=g:%22com.github.honoluluhenk.gcmonitor%22%20AND%20a:%22gcmonitor%22
+)][Maven Search Link]
 
 Helps you detecting Garbage Collector overflows before they trash, crash or overwhelm the JVM.
 
@@ -121,16 +118,52 @@ Works like UsageAboveThreshold but averages the memory usage over N memory usage
 
 If the averaged usage is above a threshold, an overflow is detected.
 
+# Usage in application servers
+This library requires the use of JDK internal classes in the package `com.sun.management`.
+
+## JBoss Wildfly
+Include the a system-dependency to the aforementioned package in a `jboss-deployment-structure.xml` file in your
+deployment.
+
+Example:
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<jboss-deployment-structure>
+	<deployment>
+		<dependencies>
+			<system>
+				<paths>
+					<path name="com/sun/management"/>
+				</paths>
+			</system>
+		</dependencies>
+	</deployment>
+</jboss-deployment-structure>
+```
 
 # Information for developers
-## Release checklist
+
+## manual testing
+A simple helper class with a main() method that produces a memory leak 
+is located ih [Tester.java](src/test/java/Tester.java)
+
+Run the Tester with different JVM-parameters (e.g.: `-Xmx500m -XX:+UseG1GC`) to experience detection.
+
+## Release
+### Checklist
 
 * check/update dependency version in README.md
 
-## Release
-
+### Execute
 Bump version numbers, build with all checks enabled and - if successful - push everything:
 ```bash
 mvn -U jgitflow:release-start jgitflow:release-finish
-# and then wait for travis...
+
 ```
+... and then wait for [Travis-CI][Travis Link].
+
+
+
+[Travis Link]: https://travis-ci.org/HonoluluHenk/gcmonitor
+[Maven Search Link]: 
+https://search.maven.org/search?q=g:%22com.github.honoluluhenk.gcmonitor%22%20AND%20a:%22gcmonitor%22

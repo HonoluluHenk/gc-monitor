@@ -59,6 +59,9 @@ public enum MemoryPool {
 	 * Code Cache. Where compiled classes live.
 	 */
 	CODE_CACHE("Code Cache", MemoryPoolType.CODE_CACHE),
+	CODE_HEAP_NON_NMETHODS("CodeHeap 'non-nmethods'", MemoryPoolType.CODE_CACHE),
+	CODE_HEAP_NON_PROFILED_NMETHODS("CodeHeap 'non-profiled nmethods'", MemoryPoolType.CODE_CACHE),
+	CODE_HEAP_PROFILED_NMETHODS("CodeHeap 'profiled nmethods'", MemoryPoolType.CODE_CACHE),
 	/**
 	 * If using CompressedOOPS, this is where the compressed bytecode lives.
 	 */

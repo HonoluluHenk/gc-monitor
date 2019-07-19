@@ -3,7 +3,7 @@
 
 	<groupId>com.github.honoluluhenk.gcmonitor</groupId>
 	<artifactId>gcmonitor</artifactId>
-	<version>1.0.5</version>
+	<version>1.0.6</version>
 	<packaging>jar</packaging>
 
 	<name>GCMonitor</name>
@@ -209,7 +209,7 @@
 				<configuration>
 					<skip>${quality-plugins.skip}</skip>
 					<effort>Max</effort>
-					<excludeFilterFile>${project.basedir}/src/quality/spotbugs/spotbugs-exclude.xml</excludeFilterFile>
+					<excludeFilterFile>src/quality/spotbugs/spotbugs-exclude.xml</excludeFilterFile>
 					<plugins>
 						<plugin>
 							<groupId>com.mebigfatguy.fb-contrib</groupId>
@@ -381,7 +381,7 @@
 					<pushFeatures>true</pushFeatures>
 
 					<!-- goals on release-finish -->
-					<goals>clean validate</goals>
+					<goals>clean verify</goals>
 
 					<!-- do not fast-forward -->
 					<suppressFastForward>true</suppressFastForward>

@@ -6,8 +6,12 @@ dist: trusty
 if: (branch != master AND NOT branch =~ /^release.*/) OR tag IS present
 
 stages:
+  # test: simply execute maven tests on multiple JDKs
   - test
+  # verify: thorough (and computationally expensive) verification /in addition to tests/.
+  # Do this in an extra step since this is only required once
   - verify
+  # Skip all verifications and just deploy/sign the artifacts
   - name: deploy
     if: repo = "HonoluluHenk/gcmonitor" AND (branch = master OR tag IS present)
 

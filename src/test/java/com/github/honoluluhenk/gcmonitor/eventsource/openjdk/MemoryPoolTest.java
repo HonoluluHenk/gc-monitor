@@ -13,6 +13,9 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import static com.github.honoluluhenk.gcmonitor.eventsource.openjdk.MemoryPool.CMS_OLD_GEN;
 import static com.github.honoluluhenk.gcmonitor.eventsource.openjdk.MemoryPool.CODE_CACHE;
+import static com.github.honoluluhenk.gcmonitor.eventsource.openjdk.MemoryPool.CODE_HEAP_NON_NMETHODS;
+import static com.github.honoluluhenk.gcmonitor.eventsource.openjdk.MemoryPool.CODE_HEAP_NON_PROFILED_NMETHODS;
+import static com.github.honoluluhenk.gcmonitor.eventsource.openjdk.MemoryPool.CODE_HEAP_PROFILED_NMETHODS;
 import static com.github.honoluluhenk.gcmonitor.eventsource.openjdk.MemoryPool.COMPRESSED_CLASS_SPACE;
 import static com.github.honoluluhenk.gcmonitor.eventsource.openjdk.MemoryPool.G1_EDEN_SPACE;
 import static com.github.honoluluhenk.gcmonitor.eventsource.openjdk.MemoryPool.G1_OLD_GEN;
@@ -60,6 +63,9 @@ class MemoryPoolTest {
 			//
 			new Data(METASPACE, "Metaspace", MemoryPoolType.METASPACE),
 			new Data(CODE_CACHE, "Code Cache", MemoryPoolType.CODE_CACHE),
+			new Data(CODE_HEAP_NON_NMETHODS, "CodeHeap 'non-nmethods'", MemoryPoolType.CODE_CACHE),
+			new Data(CODE_HEAP_NON_PROFILED_NMETHODS, "CodeHeap 'non-profiled nmethods'", MemoryPoolType.CODE_CACHE),
+			new Data(CODE_HEAP_PROFILED_NMETHODS, "CodeHeap 'profiled nmethods'", MemoryPoolType.CODE_CACHE),
 			new Data(COMPRESSED_CLASS_SPACE, "Compressed Class Space", MemoryPoolType.COMPRESSED_CLASS_SPACE)
 	);
 
