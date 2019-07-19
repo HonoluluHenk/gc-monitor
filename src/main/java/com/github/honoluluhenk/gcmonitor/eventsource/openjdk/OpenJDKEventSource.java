@@ -70,8 +70,12 @@ public class OpenJDKEventSource implements GCEventSource {
 
 			TimedData<GCEvent> event = buildEvent(action.getCollection(), poolData);
 
-			eventListeners.notifyListeners(event);
+			LOG.trace("Event notification: {}", event);
 
+			eventListeners.notifyListeners(event);
+		} catch (@SuppressWarnings("ErrorNotRethrown") NoClassDefFoundError e) {
+			// happens if class GarbageCollectionNotificationInfo is not in the classpath
+			LOG.error("Cannot find a required class: {}", e.getMessage());
 		} catch (RuntimeException rte) {
 			LOG.error("Error processing GC notification, emit GCEvent, message: {}", notification.getMessage(), rte);
 		}
@@ -104,9 +108,21 @@ public class OpenJDKEventSource implements GCEventSource {
 		Map<MemoryPoolType, Memory> result =
 				memoryAfterGC.entrySet().stream()
 						.map(this::memoryPoolFromName)
-						.collect(toMap(e -> e.getKey().getPoolType(), e -> Memory.wrap(e.getValue())));
+						.collect(toMap(
+								e -> e.getKey().getPoolType(),
+								e -> Memory.wrap(e.getValue()),
+								this::combineBySummingUsed
+						));
 
 		return result;
+	}
+
+		private Memory combineBySummingUsed(Memory a, Memory b) {
+		return new Memory(
+				a.getInit().orElse(-1L),
+				a.getUsed() + b.getUsed(),
+				a.getCommitted(),
+				a.getMax().orElse(-1L));
 	}
 
 	private Map.Entry<MemoryPool, MemoryUsage> memoryPoolFromName(Entry<String, MemoryUsage> e) {
@@ -145,6 +161,7 @@ public class OpenJDKEventSource implements GCEventSource {
 	}
 
 	private void addNotificationListener(NotificationEmitter emitter) {
+		LOG.trace("adding NotificationListener on {}", emitter);
 		emitter.addNotificationListener(
 				notificationListener,
 				notificationFilter,
@@ -157,6 +174,7 @@ public class OpenJDKEventSource implements GCEventSource {
 	}
 
 	private void removeNotificationListener(NotificationEmitter emitter) {
+		LOG.trace("removing NotificationListener on {}", emitter);
 		try {
 			emitter.removeNotificationListener(
 					notificationListener,

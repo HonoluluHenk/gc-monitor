@@ -13,4 +13,10 @@
 		<Bug code="IMC"/>
 		<Bug pattern="IMC_IMMATURE_CLASS_NO_TOSTRING"/>
 	</And>
+	<And>
+		<Bug category="PERFORMANCE"/>
+		<Bug code="PRMC"/>
+		<Bug pattern="PRMC_POSSIBLY_REDUNDANT_METHOD_CALLS"/>
+	</And>
+	<Bug pattern="OI_OPTIONAL_ISSUES_USES_IMMEDIATE_EXECUTION"/>
 </FindBugsFilter>

@@ -209,7 +209,7 @@
 				<configuration>
 					<skip>${quality-plugins.skip}</skip>
 					<effort>Max</effort>
-					<excludeFilterFile>${project.basedir}/src/quality/spotbugs/spotbugs-exclude.xml</excludeFilterFile>
+					<excludeFilterFile>src/quality/spotbugs/spotbugs-exclude.xml</excludeFilterFile>
 					<plugins>
 						<plugin>
 							<groupId>com.mebigfatguy.fb-contrib</groupId>

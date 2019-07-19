@@ -118,6 +118,28 @@ Works like UsageAboveThreshold but averages the memory usage over N memory usage
 
 If the averaged usage is above a threshold, an overflow is detected.
 
+# Usage in application servers
+This library requires the use of JDK internal classes in the package `com.sun.management`.
+
+## JBoss Wildfly
+Include the a system-dependency to the aforementioned package in a `jboss-deployment-structure.xml` file in your
+deployment.
+
+Example:
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<jboss-deployment-structure>
+	<deployment>
+		<dependencies>
+			<system>
+				<paths>
+					<path name="com/sun/management"/>
+				</paths>
+			</system>
+		</dependencies>
+	</deployment>
+</jboss-deployment-structure>
+```
 
 # Information for developers
 
